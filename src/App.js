@@ -43,7 +43,7 @@ function App() {
 
   async function handleRequest(req) {
     await axios
-      .post("localhost:5000/command", { direction: req })
+      .post("http://localhost:5000/command", { direction: req })
       .then((res) => console.log(res));
   }
   useEffect(() => {
