@@ -9,13 +9,25 @@ import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import SouthEastIcon from "@mui/icons-material/SouthEast";
 import SouthWestIcon from "@mui/icons-material/SouthWest";
 import { Box, Button, Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { AlertSuccessProp } from "./Noti";
 
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#f4ffff",
+    "& .MuiSvgIcon-root ": {
+      height: "60px",
+    },
+  },
+});
+
 function App() {
+  const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const [circleColor, setCircleColor] = useState("green");
   const direction = [
     <NorthWestIcon />,
     <ArrowUpwardIcon
@@ -26,7 +38,7 @@ function App() {
     />,
     <NorthEastIcon />,
     <ArrowBackIcon />,
-    <CircleIcon />,
+    <CircleIcon sx={{ color: circleColor }} />,
     <ArrowForwardIcon />,
     <SouthWestIcon />,
     <ArrowDownwardIcon />,
@@ -66,42 +78,66 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Box sx={{ height: "200px", padding: "2px" }} border="2px solid blue">
-        <Grid sx={{ height: "100%" }} container>
-          {direction.map((item) => {
-            return (
-              <Grid item xs={4}>
-                <Box
-                  sx={{ height: "100%" }}
-                  display="flex"
-                  justifyContent="center"
-                >
-                  {item ? (
-                    <Button
-                      variant="outlined"
-                      sx={{ width: "100%", height: "100%" }}
-                    >
-                      {item}
-                    </Button>
-                  ) : (
-                    <Box></Box>
-                  )}
-                </Box>
-              </Grid>
-            );
-          })}
-        </Grid>
-        <Box fullWidth>
+    <Box
+      className={classes.root}
+      sx={{
+        height: "600px",
+        padding: "2px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: "16px",
+      }}
+      border="2px solid blue"
+    >
+      <Grid sx={{ height: "400px", width: "400px" }} container>
+        {direction.map((item) => {
+          return (
+            <Grid item xs={4}>
+              <Box
+                sx={{ height: "100%" }}
+                display="flex"
+                justifyContent="center"
+              >
+                {item ? (
+                  <Button
+                    variant="outlined"
+                    sx={{ width: "100%", height: "100%" }}
+                  >
+                    {item}
+                  </Button>
+                ) : (
+                  <Box></Box>
+                )}
+              </Box>
+            </Grid>
+          );
+        })}
+      </Grid>
+      <Box fullWidth sx={{marginTop: "20px"}}>
+        <Box>
+          <Button
+            variant="contained"
+            sx={{ width: "50%", height: "80px", backgroundColor: "#009ab0"}}
+          >
+            <h3>MANUAL MODE</h3>
+          </Button>
           <Button
             variant="outlined"
-            sx={{ width: "20%", height: "20%", margin: "0 auto" }}
+            sx={{ width: "50%", height: "80px"}}
           >
             <RestoreFromTrashIcon sx={{ color: "green" }} />
           </Button>
         </Box>
+        <Button
+          variant="outlined"
+          sx={{ width: "100%", height: "80px", marginTop: "12px", backgroundColor: "#128a08", color: "#cfbca6" }}
+        >
+          <h3>AUTO MODE</h3>
+        </Button>
       </Box>
-    </>
+    </Box>
   );
 }
 
