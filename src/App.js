@@ -3,20 +3,26 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import SouthWestIcon from "@mui/icons-material/SouthWest";
+import NorthWestIcon from "@mui/icons-material/NorthWest";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
+import CircleIcon from "@mui/icons-material/Circle";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { useEffect } from "react";
 import axios from "axios";
 
 function App() {
   const direction = [
-    "",
-    <ArrowUpwardIcon />,
-    "",
+    <NorthWestIcon />,
+    <ArrowUpwardIcon onClick={() => handleRequest(1)} />,
+    <NorthEastIcon />,
     <ArrowBackIcon />,
-    "",
+    <CircleIcon />,
     <ArrowForwardIcon />,
-    "",
+    <SouthWestIcon />,
     <ArrowDownwardIcon />,
-    "",
+    <SouthEastIcon />,
   ];
   const keydownHandler = (e) => {
     switch (e.keyCode) {
@@ -66,7 +72,7 @@ function App() {
                   {item ? (
                     <Button
                       variant="outlined"
-                      sx={{ width: "100%", height: "100%$" }}
+                      sx={{ width: "100%", height: "100%" }}
                     >
                       {item}
                     </Button>
@@ -78,6 +84,11 @@ function App() {
             );
           })}
         </Grid>
+        <Box fullWidth>
+          <Button variant="outlined" sx={{ width: "20%", height: "20%", margin: "0 auto" }}>
+            <RestoreFromTrashIcon sx={{color: "green"}}/>
+          </Button>
+        </Box>
       </Box>
     </>
   );
