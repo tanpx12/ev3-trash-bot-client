@@ -1,21 +1,29 @@
-import { Box, Button, Grid } from "@mui/material";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import SouthWestIcon from "@mui/icons-material/SouthWest";
-import NorthWestIcon from "@mui/icons-material/NorthWest";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
-import SouthEastIcon from "@mui/icons-material/SouthEast";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CircleIcon from "@mui/icons-material/Circle";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
+import NorthWestIcon from "@mui/icons-material/NorthWest";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
-import { useEffect } from "react";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
+import SouthWestIcon from "@mui/icons-material/SouthWest";
+import { Box, Button, Grid } from "@mui/material";
 import axios from "axios";
+import { useEffect } from "react";
+import { useSnackbar } from "notistack";
+import { AlertSuccessProp } from "./Noti";
 
 function App() {
+  const { enqueueSnackbar } = useSnackbar();
   const direction = [
     <NorthWestIcon />,
-    <ArrowUpwardIcon onClick={() => handleRequest(1)} />,
+    <ArrowUpwardIcon
+      onClick={() => {
+        handleRequest(1);
+        enqueueSnackbar("Forward", AlertSuccessProp);
+      }}
+    />,
     <NorthEastIcon />,
     <ArrowBackIcon />,
     <CircleIcon />,
@@ -85,8 +93,11 @@ function App() {
           })}
         </Grid>
         <Box fullWidth>
-          <Button variant="outlined" sx={{ width: "20%", height: "20%", margin: "0 auto" }}>
-            <RestoreFromTrashIcon sx={{color: "green"}}/>
+          <Button
+            variant="outlined"
+            sx={{ width: "20%", height: "20%", margin: "0 auto" }}
+          >
+            <RestoreFromTrashIcon sx={{ color: "green" }} />
           </Button>
         </Box>
       </Box>
