@@ -42,7 +42,7 @@ function App() {
 
   async function handleRequest(req) {
     await axios
-      .post(`http://192.168.2.12:5000/controller?command=${req}`)
+      .post(`http://172.20.10.14:5000/controller?command=${req}`)
       .then((res) => console.log(res));
   }
 
@@ -88,13 +88,19 @@ function App() {
       <Box pt={3}>
         <ButtonGroup>
           <Button
-            onClick={() => setMode("m")}
+            onClick={() => {
+              setMode("m");
+              handleRequest(6);
+            }}
             variant={mode === "m" ? "contained" : "outlined"}
           >
             Manual
           </Button>
           <Button
-            onClick={() => setMode("a")}
+            onClick={() => {
+              setMode("a");
+              handleRequest(7);
+            }}
             variant={mode === "a" ? "contained" : "outlined"}
           >
             Auto
